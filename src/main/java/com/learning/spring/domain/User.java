@@ -3,6 +3,9 @@ package com.learning.spring.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 @Getter @Setter @ToString @Builder
 @NoArgsConstructor @AllArgsConstructor
@@ -16,6 +19,7 @@ public class User {
     @Column(name = "USER_ID")
     private Long id;
 
+    @Email
     private String email;
 
     private String name;
@@ -25,7 +29,12 @@ public class User {
 
     private String telephone;
 
+    @NotNull
     private int age;
 
-    private double point;
+    @Max(10000)
+    @Builder.Default
+    private double point = 0;
+
+
 }
