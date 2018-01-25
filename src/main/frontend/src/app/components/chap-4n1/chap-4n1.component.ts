@@ -8,8 +8,9 @@ import {RequestMappingService} from "../../services/request-mapping.service";
 })
 export class Chap4n1Component implements OnInit {
   greeting:string;
-
   msg:string;
+  msg2:string;
+  headers:string;
 
   constructor(private requestMappingService:RequestMappingService) { }
 
@@ -22,6 +23,15 @@ export class Chap4n1Component implements OnInit {
     this.requestMappingService.helloPost().subscribe(
       data=> {console.log(data); this.msg = data['msg']; }
     )
+
+    let type:string="member";
+    this.requestMappingService.params(type).subscribe(
+      data => { console.log(data); this.msg2 = data['msg2']; }
+    );
+
+    this.requestMappingService.headers().subscribe(
+      data => this.headers = data
+    );
 
   }
 

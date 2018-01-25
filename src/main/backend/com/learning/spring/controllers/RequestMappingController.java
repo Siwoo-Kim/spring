@@ -1,15 +1,16 @@
 package com.learning.spring.controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Log
 @Controller
@@ -31,5 +32,32 @@ public class RequestMappingController {
         model.addAttribute("msg","Server got : "+greeting);
         return this.jsonView;
     }
+
+    @GetMapping(value = "/params",params = "type=member")
+    public View paramsMember(@RequestParam String type,Model model){
+        log.warning(type);
+        model.addAttribute("msg2","Server got : "+type);
+        return this.jsonView;
+    }
+
+    @GetMapping(value = "/params",params = "type=admin")
+    public View paramsAdmin(@RequestParam String type,Model model){
+        log.warning(type);
+        model.addAttribute("msg2","Server got : "+type);
+        return this.jsonView;
+    }
+
+    @GetMapping(value="/headers")
+    public View headers(@RequestHeader HashMap map, Model model){
+
+        map.forEach( (entry,key) -> {
+            log.warning(entry.toString());
+            log.warning(key.toString());
+        } );
+
+        model.addAttribute("headers",map);
+        return this.jsonView;
+    }
+
 
 }
