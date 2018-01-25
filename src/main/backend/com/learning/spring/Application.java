@@ -6,9 +6,11 @@ import com.learning.spring.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 @SpringBootApplication
 public class Application {
@@ -34,6 +36,14 @@ public class Application {
 									.address(new Address("Busan","Altamontd","MS2-777")).build()
 							)
 			);
+		};
+	}
+
+	@Bean
+	CommandLineRunner test(MessageSource messageSource){
+		return args -> {
+			String message = messageSource.getMessage("required.user.email", null, Locale.KOREA);
+			System.out.println(message);
 		};
 	}
 }

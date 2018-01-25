@@ -31,7 +31,7 @@ public class UserValidator implements Validator {
 
 
         if(userRepository.existsByEmail(user.getEmail())){
-            errors.rejectValue("email","duplicate.user.emai",new Object[]{user.getEmail()},"User Email is duplicated");
+            errors.rejectValue("email","duplicate.user.email",new Object[]{user.getEmail()},"User Email is duplicated");
         }
 
     }
