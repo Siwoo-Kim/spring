@@ -8,7 +8,8 @@ import {MethodParamService} from "../../services/method-param.service";
 })
 export class Chap4n2Component implements OnInit {
   msg1:string;
-
+  userId:number;
+  id:number;
   constructor(private methodParamService:MethodParamService) {
 
     setTimeout(()=>{
@@ -17,6 +18,9 @@ export class Chap4n2Component implements OnInit {
         this.msg1 = data;
       },);
     },3000);
+
+    this.methodParamService.httpServlet();
+
   }
 
   ngOnInit() {
@@ -29,4 +33,9 @@ export class Chap4n2Component implements OnInit {
     });
   }
 
+  onClickHandler(){
+    this.methodParamService.pathVariable(this.userId).subscribe(
+      data => { console.log(data); this.id = data['id']; }
+    )
+  }
 }

@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/common/home/home.component';
 import {routing} from "./app.routes";
 import {HttpModule} from "@angular/http";
-import {MatCardModule, MatInputModule, MatListModule} from "@angular/material";
+import {MatButtonModule, MatCardModule, MatInputModule, MatListModule} from "@angular/material";
 import { Chap4n1Component } from './components/chap-4n1/chap-4n1.component';
 import {RequestMappingService} from "./services/request-mapping.service";
 import { Chap4n2Component } from './components/chap-4n2/chap-4n2.component';
 import {MethodParamService} from "./services/method-param.service";
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -24,8 +25,8 @@ import {MethodParamService} from "./services/method-param.service";
   imports: [
     HttpModule,
     BrowserModule,
-    routing,
-    MatCardModule, MatListModule,MatInputModule,
+    routing, FormsModule,
+    MatCardModule, MatListModule,MatInputModule,MatButtonModule,
   ],
   providers: [
     RequestMappingService,MethodParamService

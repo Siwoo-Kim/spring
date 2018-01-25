@@ -9,4 +9,15 @@
     </mat-input-container>
   </mat-card-content>
 
+  <mat-card-content>
+    <mat-input-container>
+      <input matInput type="text" placeholder="Enter id"
+      [(ngModel)]="userId">
+    </mat-input-container>
+      <button mat-raised-button color="primary" (click)="onClickHandler()" >Click</button>
+    <p>
+      Your id : {{id}}
+    </p>
+  </mat-card-content>
+
 </mat-card>

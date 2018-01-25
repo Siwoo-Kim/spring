@@ -14,4 +14,15 @@ export class MethodParamService {
       {params: {name:name}})
       .map(response => response.json());
   }
+
+  httpServlet(){
+    this.http.get(`${MethodParamService.url}/httpServlet`,
+      {params: {param1 : 'Hey!',param2 : 'Good!'}})
+      .subscribe(data => console.log(data) );
+  }
+
+  pathVariable(id:number){
+    return this.http.get(`${MethodParamService.url}/path/${id}`)
+      .map(response => response.json());
+  }
 }

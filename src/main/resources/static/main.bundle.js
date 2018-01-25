@@ -89,12 +89,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_request_mapping_service__ = __webpack_require__("../../../../../src/app/services/request-mapping.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_chap_4n2_chap_4n2_component__ = __webpack_require__("../../../../../src/app/components/chap-4n2/chap-4n2.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_method_param_service__ = __webpack_require__("../../../../../src/app/services/method-param.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -120,8 +122,8 @@ var AppModule = /** @class */ (function () {
             imports: [
                 __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_4__app_routes__["a" /* routing */],
-                __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["c" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MatInputModule */],
+                __WEBPACK_IMPORTED_MODULE_4__app_routes__["a" /* routing */], __WEBPACK_IMPORTED_MODULE_11__angular_forms__["c" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_6__angular_material__["b" /* MatCardModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["d" /* MatListModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["c" /* MatInputModule */], __WEBPACK_IMPORTED_MODULE_6__angular_material__["a" /* MatButtonModule */],
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_8__services_request_mapping_service__["a" /* RequestMappingService */], __WEBPACK_IMPORTED_MODULE_10__services_method_param_service__["a" /* MethodParamService */]
@@ -250,7 +252,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/chap-4n2/chap-4n2.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-card>\n  <mat-card-header><mat-card-title>Chapter 4 - 2</mat-card-title></mat-card-header>\n\n  <mat-card-content>\n    <mat-input-container>\n      <input matInput type=\"text\" placeholder=\"Enter name\"\n             (input)=\"onInputHandler(myInput.value)\" #myInput>\n    </mat-input-container>\n  </mat-card-content>\n\n</mat-card>\n"
+module.exports = "\n<mat-card>\n  <mat-card-header><mat-card-title>Chapter 4 - 2</mat-card-title></mat-card-header>\n\n  <mat-card-content>\n    <mat-input-container>\n      <input matInput type=\"text\" placeholder=\"Enter name\"\n             (input)=\"onInputHandler(myInput.value)\" #myInput>\n    </mat-input-container>\n  </mat-card-content>\n\n  <mat-card-content>\n    <mat-input-container>\n      <input matInput type=\"text\" placeholder=\"Enter id\"\n      [(ngModel)]=\"userId\">\n    </mat-input-container>\n      <button mat-raised-button color=\"primary\" (click)=\"onClickHandler()\" >Click</button>\n    <p>\n      Your id : {{id}}\n    </p>\n  </mat-card-content>\n\n</mat-card>\n"
 
 /***/ }),
 
@@ -282,6 +284,7 @@ var Chap4n2Component = /** @class */ (function () {
                 _this.msg1 = data;
             });
         }, 3000);
+        this.methodParamService.httpServlet();
     }
     Chap4n2Component.prototype.ngOnInit = function () {
     };
@@ -291,6 +294,10 @@ var Chap4n2Component = /** @class */ (function () {
             console.log(data);
             _this.msg1 = data;
         });
+    };
+    Chap4n2Component.prototype.onClickHandler = function () {
+        var _this = this;
+        this.methodParamService.pathVariable(this.userId).subscribe(function (data) { console.log(data); _this.id = data['id']; });
     };
     Chap4n2Component = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
@@ -393,6 +400,14 @@ var MethodParamService = /** @class */ (function () {
     MethodParamService_1 = MethodParamService;
     MethodParamService.prototype.complex = function (name) {
         return this.http.get(MethodParamService_1.url + "/complex", { params: { name: name } })
+            .map(function (response) { return response.json(); });
+    };
+    MethodParamService.prototype.httpServlet = function () {
+        this.http.get(MethodParamService_1.url + "/httpServlet", { params: { param1: 'Hey!', param2: 'Good!' } })
+            .subscribe(function (data) { return console.log(data); });
+    };
+    MethodParamService.prototype.pathVariable = function (id) {
+        return this.http.get(MethodParamService_1.url + "/path/" + id)
             .map(function (response) { return response.json(); });
     };
     MethodParamService.url = "/mp";
