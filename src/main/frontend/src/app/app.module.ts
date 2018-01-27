@@ -12,6 +12,7 @@ import {RequestMappingService} from "./services/request-mapping.service";
 import { Chap4n2Component } from './components/chap-4n2/chap-4n2.component';
 import {MethodParamService} from "./services/method-param.service";
 import {FormsModule} from "@angular/forms";
+import { Chap4n3Component } from './components/chap-4n3/chap-4n3.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {FormsModule} from "@angular/forms";
     HomeComponent,
     Chap4n1Component,
     Chap4n2Component,
+    Chap4n3Component,
 
   ],
   imports: [
