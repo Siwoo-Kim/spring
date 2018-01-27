@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Http} from "@angular/http";
+import {Http, RequestOptions, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
-import {parseHttpResponse} from "selenium-webdriver/http";
 
 @Injectable()
 export class MethodParamService {
@@ -25,4 +24,32 @@ export class MethodParamService {
     return this.http.get(`${MethodParamService.url}/path/${id}`)
       .map(response => response.json());
   }
+
+  threeParams(id:number,name:string,email:string){
+    return this.http
+      .get(
+        `${MethodParamService.url}/three`,
+        {params : { id : id , name : name , email : email } }
+    )
+      .map(response => { console.log(response.json()); return response.json(); })
+  }
+
+  getHeaders(){
+
+    let options = new RequestOptions({
+      headers : this._getHeaders()
+    })
+
+    return this.http
+      .get(`${MethodParamService.url}/header`,options).map(response => response.json());
+  }
+
+  private _getHeaders():Headers {
+    let header = new Headers({
+      'Content-Type': 'application/json',
+    });
+
+    return header;
+  }
+
 }

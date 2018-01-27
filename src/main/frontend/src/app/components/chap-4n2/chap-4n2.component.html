@@ -20,4 +20,55 @@
     </p>
   </mat-card-content>
 
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>User Info</mat-panel-title>
+          <mat-panel-description>Before you need to submit</mat-panel-description>
+        </mat-expansion-panel-header>
+
+      </mat-expansion-panel>
+        <p>
+          Email : {{paramUser.email}}, ID : {{paramUser.id}}, Name : {{paramUser.name}}
+        </p>
+    </mat-accordion>
+    <div class="form-group">
+      <mat-input-container>
+        <input matInput type="text" placeholder="Enter ID"
+               [(ngModel)]="id2" class="form-control">
+      </mat-input-container>
+
+      <mat-input-container>
+        <input matInput type="text" placeholder="Enter EMAIL"
+               [(ngModel)]="email2"  class="form-control" >
+      </mat-input-container>
+
+      <mat-input-container>
+        <input matInput type="text" placeholder="Enter NAME"
+               [(ngModel)]="name2" class="form-control" >
+      </mat-input-container>
+
+      <button mat-raised-button color="primary" (click)="onSubmitHandler()">Submit</button>
+
+    </div>
+
+    <div class="form-group">
+      <mat-input-container>
+        <input matInput type="text" placeholder="Enter ID" [(ngModel)]="email3">
+      </mat-input-container><br/>
+      <button mat-raised-button color="primary" (click)="onCreateCookie()">Create Cookie</button>
+    </div>
+
+    <mat-card-content>
+        <mat-card-header>
+          <mat-card-title>
+          <span *ngIf="headers">{{ headers | json}}</span>
+          </mat-card-title>
+        </mat-card-header>
+        <button mat-raised-button color="primary" (click)="onCreateHeaderHandler()">Get Headers</button>
+    </mat-card-content>
+
+
+
+
 </mat-card>
